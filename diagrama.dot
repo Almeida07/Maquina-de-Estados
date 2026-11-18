@@ -1,0 +1,15 @@
+digraph FSM {
+  rankdir=TB; dpi=200; nodesep=1.2; ranksep=1.0;
+  node [shape=ellipse, style=filled, fillcolor="#EAF1FB", color="#2F5597", fontname="Helvetica", fontsize=16];
+  edge [fontname="Helvetica", fontsize=14, color="#333333"];
+  inicio [shape=point, width=0.18, color="#000000", fillcolor="#000000"];
+  OCIOSA [peripheries=2];
+  inicio -> OCIOSA;
+  OCIOSA -> COM_CREDITO [label="T1  inserir_moeda"];
+  COM_CREDITO -> COM_CREDITO [label="T2  inserir_moeda\nT4  selecionar [crédito < preço]"];
+  COM_CREDITO -> DISPENSANDO [label="T3  selecionar\n[crédito ≥ preço]"];
+  COM_CREDITO -> OCIOSA [label="T5  cancelar"];
+  DISPENSANDO -> OCIOSA [label="T6  dispensa_ok"];
+  DISPENSANDO -> FORA_DE_SERVICO [label="T7  falha_mecanica"];
+  FORA_DE_SERVICO -> OCIOSA [label="T8  reparar"];
+}
